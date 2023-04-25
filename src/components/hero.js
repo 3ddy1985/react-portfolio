@@ -7,14 +7,7 @@ export default function Hero() {
         const ctx = canvas.getContext('2d', {
             willReadFrequently: true,
         });
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-          }
-      
-          resizeCanvas();
-          
+        
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
@@ -84,27 +77,27 @@ export default function Hero() {
         }
 
         class Effect {
-            constructor(context, canvasWidth, canvasHeight){
-                this.context = context;
-                this.canvasWidth = canvasWidth;
-                this.canvasHeight = canvasHeight;
-                this.textX = this.canvasWidth / 2;
-                this.textY = this.canvasHeight / 2;
-                this.fontSize = 150;
-                this.lineHeight = this.fontSize * 0.9;
-                this.maxTextWidth = this.canvasWidth * 0.8;
-                // partical text
-                this.particles = [];
-                this.gap = 1;
-                this.mouse = {
-                    radius: 5000,
-                    x: 0,
-                    y: 0
-                }
-                window.addEventListener('mousemove', (e) => {
-                    this.mouse.x = e.x;
-                    this.mouse.y = e.y;
-                })
+            constructor(context, canvasWidth, canvasHeight) {
+              this.context = context;
+              this.canvasWidth = canvasWidth;
+              this.canvasHeight = canvasHeight;
+              this.textX = this.canvasWidth / 2;
+              this.textY = this.canvasHeight / 2;
+              this.fontSize = this.canvasWidth < 768 ? 80 : 150;
+              this.lineHeight = this.fontSize * 0.9;
+              this.maxTextWidth = this.canvasWidth * 0.8;
+              // particle text
+              this.particles = [];
+              this.gap = 1;
+              this.mouse = {
+                radius: 5000,
+                x: 0,
+                y: 0,
+              };
+              window.addEventListener('mousemove', (e) => {
+                this.mouse.x = e.x;
+                this.mouse.y = e.y;
+              });
             }
             wrapText(text){
                 const gradient = this.context.createLinearGradient(0, 0, this.canvasWidth, this.canvasHeight)
@@ -169,16 +162,33 @@ export default function Hero() {
             }
         }
 
-        const effect = new Effect(ctx, canvas.width, canvas.height)
-        effect.wrapText('Nick Langley')
-        effect.render()
+        let effect = null;
 
-        function animate(){
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            effect = new Effect(ctx, canvas.width, canvas.height);
+            effect.wrapText('Nick Langley');
+            animate();
+        }
+
+        function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             effect.render();
             requestAnimationFrame(animate);
         }
-        animate();
+
+        init();
+
+        window.addEventListener('resize', () => {
+            init();
+        });
+
+        return () => {
+            window.removeEventListener('resize', () => {
+            init();
+            });
+        };
     });
 
     return (
