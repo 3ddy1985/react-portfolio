@@ -1,21 +1,29 @@
-import React, { useState, useLayoutEffect, useRef, lazy, Suspense } from 'react';
+import React, { useState, useLayoutEffect, useRef, lazy, useEffect } from 'react';
 import Nav from './components/nav/Nav';
 import Header from './components/header/Header';
+import Loading from './components/loading/Loading';
 const About = lazy(() => import('./components/about/About'));
 const Skills = lazy(() => import('./components/skills/Skills'));
 const Projects = lazy(() => import('./components/project/Projects'));
 const Interests = lazy(() => import('./components/interests/Interests'));
 const Contact = lazy(() => import('./components/contact/Contact'));
 
-
 export default function App() {
   const [activeSection, setActiveSection] = useState('about');
   const [showNav, setShowNav] = useState(false);
+  const [loading, setLoading] = useState(true);
   const aboutRef = useRef();
   const skillsRef = useRef();
   const projectsRef = useRef();
   const interestsRef = useRef();
   const contactRef = useRef();
+
+  // Simulate the loading time
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 7100);
+  }, []);
 
   useLayoutEffect(() => {
     const handleScroll = () => {
@@ -53,16 +61,19 @@ export default function App() {
 
   return (
     <>
-      <Nav showNav={showNav} activeSection={activeSection} setActiveSection={setActiveSection} />
-      <Header />
-      <Suspense fallback={<div>Loading...</div>}>
-        <About ref={aboutRef} />
-        <Skills ref={skillsRef} />
-        <Projects ref={projectsRef} />
-        <Interests ref={interestsRef} />
-        <Contact ref={contactRef} />
-      </Suspense>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Nav showNav={showNav} activeSection={activeSection} setActiveSection={setActiveSection} />
+          <Header />
+          <About ref={aboutRef} />
+          <Skills ref={skillsRef} />
+          <Projects ref={projectsRef} />
+          <Interests ref={interestsRef} />
+          <Contact ref={contactRef} />
+        </>
+      )}
     </>
   );
-  
 }
