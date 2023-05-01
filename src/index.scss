@@ -37,7 +37,7 @@ html {
 
 body {
     background: $bg-black;
-    color: $color-white;
+    color: $color-grey;
     overflow-x: hidden;
     font-family: 'Lato', sans-serif;
     line-height: 1.7;
@@ -67,7 +67,8 @@ section {
 section h2 {
     text-align: center;
     color: $primary-color;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    padding-top: 1rem;
 }
 
 .text-grey {

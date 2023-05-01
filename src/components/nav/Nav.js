@@ -6,43 +6,42 @@ import { GiSkills } from 'react-icons/gi';
 import { AiFillProject } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
 import { BsChatLeftTextFill } from 'react-icons/bs';
-import { useState } from 'react';
 
-const Nav = () => {
+const Nav = ({ activeSection, setActiveSection, showNav }) => {
   return (
-    <nav>
+    <nav className={!showNav ? 'hidden' : ''}>
       <a href='#top'>
-      <div class='nav-item'>
+      <div className={`nav-item ${activeSection === 'top' ? 'active' : ''}`} onClick={() => setActiveSection('top')}>
         <RxPinTop/>
-        <span class='nav-item-text'>Top</span>
+        <span className='nav-item-text'>Top</span>
       </div>
       </a>
       <a href='#about'>
-        <div className='nav-item active'>
+        <div className={`nav-item ${activeSection === 'about' ? 'active' : ''}`} onClick={() => setActiveSection('about')}>
           <BsInfoCircleFill/>
           <span className='nav-item-text'>About Me</span>
         </div>
       </a>
       <a href='#skills'>
-        <div className='nav-item'>
+        <div className={`nav-item ${activeSection === 'skills' ? 'active' : ''}`} onClick={() => setActiveSection('skills')}>
           <GiSkills/>
           <span className='nav-item-text'>Skills</span>
         </div>
       </a>
       <a href='#projects'>
-        <div className='nav-item'>
+        <div className={`nav-item ${activeSection === 'projects' ? 'active' : ''}`} onClick={() => setActiveSection('projects')}>
           <AiFillProject/>
           <span className='nav-item-text'>Projects</span>
         </div>
       </a>
       <a href='#interests'>
-        <div className='nav-item'>
+        <div className={`nav-item ${activeSection === 'interests' ? 'active' : ''}`} onClick={() => setActiveSection('interests')}>
           <AiFillHeart/>
           <span className='nav-item-text'>Interests</span>
         </div>
       </a>
       <a href='#contact'>
-        <div className='nav-item'>
+        <div className={`nav-item ${activeSection === 'contact' ? 'active' : ''}`} onClick={() => setActiveSection('contact')}>
           <BsChatLeftTextFill/>
           <span className='nav-item-text'>Contact Me</span>
         </div>
@@ -51,4 +50,4 @@ const Nav = () => {
   )
 }
 
-export default Nav
+export default Nav;

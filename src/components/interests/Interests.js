@@ -1,9 +1,10 @@
 import React from 'react'
+import { forwardRef } from 'react';
 
-const Interests = () => {
+const Interests = forwardRef((props, ref) => {
   return (
-    <section id='interests'>Interests</section>
+    <section ref={ref} id='interests'>Interests</section>
   )
-}
+})
 
 export default Interests
