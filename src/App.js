@@ -1,4 +1,5 @@
 import React, { useState, useLayoutEffect, useRef, lazy, useEffect } from 'react';
+import Color_mode from './components/color_mode/Color_mode';
 import Nav from './components/nav/Nav';
 import Header from './components/header/Header';
 import Loading from './components/loading/Loading';
@@ -12,6 +13,11 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('about');
   const [showNav, setShowNav] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [colorMode, setColorMode] = useState(() => {
+    const storedColorMode = localStorage.getItem('colorMode');
+    return storedColorMode ? storedColorMode : 'dark';
+  });
+
   const aboutRef = useRef();
   const skillsRef = useRef();
   const projectsRef = useRef();
@@ -24,6 +30,15 @@ export default function App() {
       setLoading(false);
     }, 7100);
   }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("light-mode", colorMode === "light");
+  }, [colorMode]);
+
+  useEffect(() => {
+    localStorage.setItem('colorMode', colorMode);
+  }, [colorMode]);
+ 
 
   useLayoutEffect(() => {
     const handleScroll = () => {
@@ -65,8 +80,11 @@ export default function App() {
         <Loading />
       ) : (
         <>
+          <Color_mode colorMode={colorMode} onColorModeChange={setColorMode} />
+
+
           <Nav showNav={showNav} activeSection={activeSection} setActiveSection={setActiveSection} />
-          <Header />
+          <Header colorMode={colorMode}/>
           <About ref={aboutRef} />
           <Skills ref={skillsRef} />
           <Projects ref={projectsRef} />

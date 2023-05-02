@@ -86,11 +86,12 @@ useEffect(() => {
     }
 
     class Effect {
-        constructor(context, canvasWidth, canvasHeight) {
+        constructor(context, canvasWidth, canvasHeight, colorMode) {
             // constructor initializes properties of the Effect object
             this.context = context; // the canvas context to draw on
             this.canvasWidth = canvasWidth; // width of the canvas
             this.canvasHeight = canvasHeight; // height of the canvas
+            this.colorMode = colorMode;
             this.textX = this.canvasWidth / 2; // x-coordinate of the text
             this.textY = this.canvasHeight / 2; // y-coordinate of the text
             this.fontSize = this.canvasWidth < 768 ? 80 : 120; // font size based on canvas width
@@ -114,16 +115,19 @@ useEffect(() => {
         // method to wrap text and convert it to particles
         wrapText(text){
             // create gradient for the text fill
-            const gradient = this.context.createLinearGradient(0, 0, this.canvasWidth, this.canvasHeight)
-            gradient.addColorStop(0.1, '#ff69b4');
-            gradient.addColorStop(0.2, '#fc5dad');
-            gradient.addColorStop(0.3, '#fa52a6');
-            gradient.addColorStop(0.4, '#fc429f');
-            gradient.addColorStop(0.5, '#fa238e');
-            gradient.addColorStop(0.6, '#fc429f');
-            gradient.addColorStop(0.7, '#fa52a6');
-            gradient.addColorStop(0.8, '#fc5dad');
-            gradient.addColorStop(0.9, '#ff69b4');
+            let gradient;
+            if (this.colorMode === 'dark') {
+                gradient = this.context.createLinearGradient(0, 0, this.canvasWidth, this.canvasHeight);
+                gradient.addColorStop(0.25, '#ff369b');
+                gradient.addColorStop(0.5, '#ff83c1');
+                gradient.addColorStop(0.75, '#ff369b');
+            } else {
+                gradient = this.context.createLinearGradient(0, 0, this.canvasWidth, this.canvasHeight);
+                gradient.addColorStop(0.25, '#0234E7');
+                gradient.addColorStop(0.5, '#053BFD');
+                gradient.addColorStop(0.75, '#0234E7');
+            }
+
             this.context.fillStyle = gradient;
         
             // set font style and alignment

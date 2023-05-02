@@ -5,7 +5,7 @@ import { forwardRef } from 'react';
 const Skills = forwardRef((props, ref) => {
   return (
     <section ref={ref} id='skills'>
-    <h2>Skills</h2>
+    <h2 className='glowing-txt'><span>S<span className='faulty-letter'>k</span>ills</span></h2>
     <div className='container'>
     <div className='skill-card'>
       <p>hello</p>
@@ -15,4 +15,4 @@ const Skills = forwardRef((props, ref) => {
   )
 })
 
-export default Skills
+export default Skills 

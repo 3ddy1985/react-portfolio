@@ -26,8 +26,8 @@ const Loading = () => {
   return (
     <div className="loading-box">
       <div className="loading-circle" style={loadingCircleStyle}>
-        <p className="loading-count">
-          <span>{load}</span>%
+        <p className="loading-count glowing-txt">
+          <span>{load}</span><span className='faulty-letter'>%</span>
         </p>
       </div>
     </div>
