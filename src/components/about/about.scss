@@ -3,18 +3,31 @@
  .container {
     position: relative;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
  }
 
- .column {
-    width: 50%;
+.about-img {
+   display: flex;
+   justify-content: center;
+   margin: auto;
+   margin-bottom: 3rem;
+   width: 250px;
+   height: 250px;
+   background-image: url('../../assets/nick.png');
+   background-size: cover;
+   overflow: hidden;
+   border-radius: 100%;
+   box-shadow: var(--outer-box-shadow);
+}
+
+article {
+   -webkit-columns: 2 200px;
+   -moz-columns: 2 200px;
+   columns: 2 200px;
  }
 
- #canvas2 {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 3;
+ article p {
+   margin-bottom: 1rem;
  }
 
  @media screen and (max-width: 820px) {

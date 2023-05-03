@@ -1,5 +1,4 @@
 @import '../../index.scss';
-@import '../../scss/animation';
 
 .loading-box {
     position: fixed;
@@ -15,7 +14,7 @@
     align-items: center;
 
     border-radius: 50%;
-    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.5), -4px -4px 16px rgba(255, 255, 255, 0.144);
+    box-shadow: var(--outer-box-shadow);
   }
   
   .loading-circle {
@@ -27,17 +26,17 @@
     height: 180px;
     background: conic-gradient(from 0deg at 50% 50%, rgba(111, 123, 247, 1) 0%, rgba(155, 248, 244, 1) 0%, #101012 0%);
     border-radius: 100px;
-    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.75), -4px -4px 16px rgba(255, 255, 255, 0.1);
+    box-shadow: var(--inner-box-shadow);
     animation: spin 1s infinite linear;
   }
-
+ 
  .glowing-txt {
-    -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
-    0 0 0.45em var(--headers-glow);
-  -moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
-    0 0 0.45em var(--headers-glow);
-  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--headers-glow);
-  animation: text-flicker 3s linear infinite;
+    -webkit-text-shadow: 0 0 0.125em hsla(0, 0%, 3%, 0.3),
+    0 0 0.45em var(--primary-color);
+    -moz-text-shadow: 0 0 0.125em hsla(0, 0%, 0%, 0.3),
+    0 0 0.45em var(--primary-color);
+    text-shadow: 0 0 0.125em hsla(0, 0%, 0%, 0.3), 0 0 0.45em var(--primary-color);
+    animation: text-flicker 3s linear infinite;
   }
 
   .faulty-letter {
@@ -64,10 +63,10 @@
     width: 174px;
     height: 174px;
     border-radius: 100px;
-    background: #1D1E22;
-    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.75) inset, -4px -4px 16px rgba(255, 255, 255, 0.1) inset;
+    background: var(--bg-main);
+    box-shadow: var(--inset-box-shadow);
     animation: spin 1s infinite linear reverse;
-    color: var(--headers);
+    color: var(--headers-glow);
     font-size: 2.6rem;
     font-weight: 900;
   }
@@ -75,3 +74,74 @@
   .loading-count #loadingNumber {
     font-size: 4em;
   }
+
+  // text animation
+@keyframes faulty-flicker {
+  0% {
+    opacity: 0.1;
+  }
+  2% {
+    opacity: 0.1;
+  }
+  4% {
+    opacity: 0.5;
+  }
+  19% {
+    opacity: 0.5;
+  }
+  21% {
+    opacity: 0.1;
+  }
+  23% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  83% {
+    opacity: 0.4;
+  }
+
+  87% {
+    opacity: 1;
+  }
+}
+
+@keyframes text-flicker {
+  0% {
+    opacity: 0.1;
+  }
+  2% {
+    opacity: 1;
+  }
+  8% {
+    opacity: 0.1;
+  }
+  9% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 0.1;
+  }
+  20% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  72% {
+    opacity: 0.2;
+  }
+  77% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}

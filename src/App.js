@@ -23,7 +23,7 @@ export default function App() {
   const projectsRef = useRef();
   const interestsRef = useRef();
   const contactRef = useRef();
-
+  
   // Simulate the loading time
   useEffect(() => {
     setTimeout(() => {
@@ -77,12 +77,10 @@ export default function App() {
   return (
     <>
       {loading ? (
-        <Loading />
+        <Loading colorMode={colorMode}/>
       ) : (
         <>
           <Color_mode colorMode={colorMode} onColorModeChange={setColorMode} />
-
-
           <Nav showNav={showNav} activeSection={activeSection} setActiveSection={setActiveSection} />
           <Header colorMode={colorMode}/>
           <About ref={aboutRef} />

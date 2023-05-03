@@ -4,60 +4,55 @@
     position: fixed;
     top: 0;
     right: 2rem;
+    z-index: 2;
 }
 
 button{
     padding-left: 0.5rem;
-  width: 80px;
-  height: 40px;
-  border: none;
-  cursor: pointer;
-  background-color: var(--bg-main);
-  border-radius: 50px;
-  background: linear-gradient(145deg, var(--bg-main), var(--seconday-gradient));
-  box-shadow: var(--outer-box-shadow),
-              inset var(--inner-box-shadow);
-//   box-shadow: 5px 5px 20px #3a3a3a,
-//               inset 3px 0 2px #242424,
-//               2px 2px 5px #686767;
-  margin-top: 32px;
-  transition: ease 0.3s;
+    width: 80px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--bg-main);
+    border-radius: 50px;
+    background: linear-gradient(145deg, var(--bg-main), var(--seconday-gradient));
+    box-shadow: var(--outer-box-shadow),
+                inset var(--inner-box-shadow);
+    margin-top: 32px;
+    transition: ease 0.3s;
 }
 
 button:focus{
-  outline: none;
-  border: none;
+    outline: none;
+    border: none;
 }
 
 button.on{
-  background: linear-gradient(145deg, var(--bg-main), var(--secondary-gradient));
-  box-shadow: var(--outer-box-shadow),
-              inset var(--inner-box-shadow);
-//   box-shadow: 5px 5px 20px #2b2a2a,
-//               inset 3px 0 2px #FFFFFF,
-//               2px 2px 5px #f7e054;
-  margin-top: 32px;
+    background: linear-gradient(145deg, var(--bg-main), var(--secondary-gradient));
+    box-shadow: var(--outer-box-shadow),
+                inset var(--inner-box-shadow);
+    margin-top: 32px;
 }
 
 #btn-toggle{
-  width: 25px;
-  height: 25px;
-  border-radius: 50px;
-  transition: ease-in-out 0.3s;
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
+    transition: ease-in-out 0.3s;
 }
 
 #btn-toggle.off{
-  background: var(--hover-color);
-  box-shadow: inset 3px 3px 6px var(--headers-glow),
-              inset -2px -2px 5px #FFFFFF;
+    background: var(--secondary-color-opposite);
+    box-shadow: inset 3px 3px 6px var(--primary-color-opposite),
+                inset -2px -2px 5px #ffffff9c;
 }
 
 #btn-toggle.on{
-  background-color: var(--hover-color);
-  box-shadow: inset 3px 3px 6px var(--headers-glow),
-              inset -2px -2px 2px #FFFFFF;
-  border-radius: 100%;
-  transform: translateX(39px);
+    background-color: var(--secondary-color-opposite);
+    box-shadow: inset 3px 3px 6px var(--primary-color-opposite),
+                inset -2px -2px 2px #1a1919a4;
+    border-radius: 100%;
+    transform: translateX(39px);
 }
 
 

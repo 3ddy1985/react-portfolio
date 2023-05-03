@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, forwardRef } from 'react';
+import './header.scss'
 import Scroll from '../scroll/Scroll';
 
 const Header = forwardRef((props, ref) => {
@@ -212,7 +213,7 @@ useEffect(() => {
     function init() { // Declare a function named 'init'
         canvas.width = window.innerWidth; // Set the width of the canvas to the window's inner width
         canvas.height = window.innerHeight; // Set the height of the canvas to the window's inner height
-        effect = new Effect(ctx, canvas.width, canvas.height); // Create a new 'Effect' object, passing in the context, canvas width, and canvas height
+        effect = new Effect(ctx, canvas.width, canvas.height, props.colorMode); // Create a new 'Effect' object, passing in the context, canvas width, and canvas height
         effect.wrapText('Nick Langley'); // Call the 'wrapText' method of the 'effect' object, passing in the string 'Nick Langley'
         animate(); // Call the 'animate' function
     }
@@ -266,12 +267,12 @@ useEffect(() => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', debouncedResize);
     };
-  }, []);
+  }, [props.colorMode]);
 
   return (
     <header ref={ref} id="top">
       <canvas ref={canvasRef} id="canvas1"></canvas>
-      <Scroll />
+      <Scroll  />
     </header>
   );
 });

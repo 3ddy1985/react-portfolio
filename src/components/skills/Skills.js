@@ -5,7 +5,7 @@ import { forwardRef } from 'react';
 const Skills = forwardRef((props, ref) => {
   return (
     <section ref={ref} id='skills'>
-    <h2 className='glowing-txt'><span>S<span className='faulty-letter'>k</span>ills</span></h2>
+    <h2><span>S<span className='faulty-letter'>k</span>ills</span></h2>
     <div className='container'>
     <div className='skill-card'>
       <p>hello</p>
