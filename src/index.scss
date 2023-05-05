@@ -25,7 +25,7 @@
     --seconday-gradient: #252525;
 
     // shadows
-    --outer-box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.5), -4px -4px 16px rgba(255, 255, 255, 0.144);
+    --outer-box-shadow: 6px 6px 12px #070707, -6px -6px 12px #1d1d1d;
     --inner-box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.75), -4px -4px 16px rgba(255, 255, 255, 0.1);
     --inset-box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.75) inset, -4px -4px 16px rgba(255, 255, 255, 0.1) inset;
     
@@ -56,9 +56,10 @@
     --seconday-gradient: #d6d5d5;
 
     // shadows
-    --outer-box-shadow: 4px 4px 16px rgba(228, 226, 226, 0.5), -4px -4px 16px rgba(104, 103, 103, 0.144);
+    --outer-box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3);
     --inner-box-shadow: 4px 4px 16px rgba(255, 255, 255, 0.75), -4px -4px 16px rgba(78, 78, 78, 0.1);
-    --inset-box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.75) inset, -4px -4px 16px rgba(255, 255, 255, 0.1) inset;
+    --inset-box-shadow: 6px 4px 10px rgba(99, 96, 96, 0.75) inset, -4px -4px 16px rgba(255, 255, 255, 0.274) inset;
+    --outer-box-shadow-lg: 14px 14px 20px rgba(228, 226, 226, 0.5), -14px -14px 20px rgba(104, 103, 103, 0.144);
 
     // nav shadows
     --a-background: linear-gradient(145deg, #efefef, #ececec);
