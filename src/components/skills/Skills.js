@@ -92,6 +92,18 @@ const Skills = forwardRef((props, ref) => {
   const frontendBadgeRef = useRef();
   const [visibleSkillBadges, setVisibleSkillBadges] = useState(0);
   const badgeRefs = useRef([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+useEffect(() => {
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  window.addEventListener('resize', handleResize);
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
 
 
   useEffect(() => {
@@ -194,7 +206,7 @@ const Skills = forwardRef((props, ref) => {
               {activeBadge === category.name &&
                 category.badges.map((badge, index) => {
                   const angle = (index * (360 / category.badges.length)) * (Math.PI / 180);
-                  const radius = 120;
+                  const radius = windowWidth <= 600 ? 120 : windowWidth <= 820 ? 200 : 120;
                   const x = radius * Math.cos(angle);
                   const y = radius * Math.sin(angle);
                   return (
@@ -204,8 +216,8 @@ const Skills = forwardRef((props, ref) => {
                       style={{
                         opacity: visibleSkillBadges > index ? 1 : 0,
                         position: 'absolute',
-                        top: badgeRefs.current[catIndex].offsetTop + y + 25,
-                        left: badgeRefs.current[catIndex].offsetLeft + x + 25,
+                        top: badgeRefs.current[catIndex].offsetTop + y + (windowWidth <= 600 ? 20 : windowWidth <= 820 ? 40 : 25),
+  left: badgeRefs.current[catIndex].offsetLeft + x + (windowWidth <= 600 ? 20 : windowWidth <= 820 ? 40 : 25),
                       }}
                       data-tooltip={badge.text} 
                     >
