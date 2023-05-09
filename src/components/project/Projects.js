@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect, useRef, useState} from 'react';
+import React, {forwardRef, useEffect, useState} from 'react';
 import './projects.scss';
 import Tic1 from'../../assets/project_images/tictac2.png';
 import Tic2 from'../../assets/project_images/tictac3.png';
@@ -169,17 +169,17 @@ const Projects = forwardRef((props, ref) => {
                             {
                             selectedProject.liveLink && <a href={
                                 selectedProject.liveLink
-                            } target='_blank'>Live Link</a>
+                            } target='_blank' rel="noopener noreferrer">Live Link</a>
                         }
                             {
                             selectedProject.readMe1 && <a href={
                                 selectedProject.readMe1
-                            } target='_blank'>ReadMe1</a>
+                            } target='_blank' rel="noopener noreferrer">ReadMe1</a>
                         }
                             {
                             selectedProject.readMe2 && <a href={
                                 selectedProject.readMe2
-                            } target='_blank'>ReadMe2</a>
+                            } target='_blank' rel="noopener noreferrer">ReadMe2</a>
                         } </div>
                     </div>
                 </div>

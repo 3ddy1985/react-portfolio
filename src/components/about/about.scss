@@ -1,37 +1,33 @@
- @import '../../index.scss';
+@import '../../index.scss';
 
- .container {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap; 
- }
+#sills .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 
 .about-img {
-   display: flex;
-   justify-content: center;
-   margin: auto;
-   margin-bottom: 3rem;
-   width: 250px;
-   height: 250px;
-   background-image: url('../../assets/nick.png');
-   background-size: cover;
-   overflow: hidden;
-   border-radius: 100%;
-   box-shadow: var(--outer-box-shadow);
+  margin-bottom: 2rem;
+  width: 250px;
+  height: 250px;
+  background-image: url('../../assets/nick.png');
+  background-size: cover;
+  border-radius: 100%;
+  box-shadow: var(--outer-box-shadow);
 }
 
 article {
-   -webkit-columns: 2 200px;
-   -moz-columns: 2 200px;
-   columns: 2 200px;
- }
+  column-count: 1;
+  width: 90%;
+}
 
- article p {
-   margin-bottom: 1rem;
- }
+article p {
+  margin-bottom: 1rem;
+}
 
- @media screen and (max-width: 820px) {
-    .column {
-        width: 100%;
-    }
- }
+@media screen and (max-width: 820px) {
+  .container {
+    flex-direction: column;
+  }
+}

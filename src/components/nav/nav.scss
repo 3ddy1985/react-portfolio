@@ -47,11 +47,13 @@ nav a {
     position: absolute;
     left: 100%;
     top: 50%;
-    margin-left: 1.2rem;
+    background: var(--a-background);
+    border-radius: 3rem;
+    box-shadow: var(--a-box-shadow);
+    margin-left: 2.5rem;
     transform: translate(0, -50%);
     white-space: nowrap;
     padding: 0.7rem 1.5rem;
-    border-radius: 0 3rem 3rem 0;
     z-index: 2;
     opacity: 0;
     transition: opacity 0.1s ease-in;

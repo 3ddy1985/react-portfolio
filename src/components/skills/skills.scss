@@ -21,10 +21,6 @@
   margin: auto;
 }
 
-// .key-skills-group {
-
-// }
-
 .skills-btn {
     width: 220px;
     display: flex;
@@ -100,7 +96,7 @@
 .skill-item[data-tooltip]:hover::before {
   content: attr(data-tooltip);
   position: absolute;
-  top: -24px; // Adjust this value to position the tooltip above the badge
+  top: -24px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #333;

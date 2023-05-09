@@ -14,8 +14,8 @@ const Contact = forwardRef((props, ref) => {
         <div className='row'>
         <div className='contact-icons'>
           <a href='mailto:nick.langley@hotmail.com' className='contact-badge'><MdEmail /></a>
-          <a href='https://github.com/3ddy1985' target='_blank' className='contact-badge'><FaGithubSquare /></a>
-          <a href='https://www.linkedin.com/in/nick85/' target='_blank' className='contact-badge'><BsLinkedin /></a>
+          <a href='https://github.com/3ddy1985' target='_blank' rel="noopener noreferrer" className='contact-badge'><FaGithubSquare /></a>
+          <a href='https://www.linkedin.com/in/nick85/' target='_blank' rel="noopener noreferrer" className='contact-badge'><BsLinkedin /></a>
         </div>
         <form id='contact-form' class="contact-form" action="https://formspree.io/f/mqkoyvye" method='POST'>
           <div className="inputs">

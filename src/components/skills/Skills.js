@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect, forwardRef } from 'react';
-
 import './skills.scss';
 
 import Html from '../../assets/badges/html.png';
@@ -32,8 +31,6 @@ import OutsideBox from '../../assets/badges/outside.png';
 import Communication from '../../assets/badges/coms.png';
 import CritThinking from '../../assets/badges/bi.png';
 import CustomerService from '../../assets/badges/customer.png';
-
-      
 
 const skillCategories = [
   {
@@ -94,23 +91,23 @@ const Skills = forwardRef((props, ref) => {
   const badgeRefs = useRef([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-useEffect(() => {
-  const handleResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
 
-  window.addEventListener('resize', handleResize);
-  return () => {
-    window.removeEventListener('resize', handleResize);
-  };
-}, []);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
 
   useEffect(() => {
     if (buttonClicked && visibleBadges < 4) {
       const timer = setTimeout(() => {
         setVisibleBadges(visibleBadges + 1);
-      }, 200);
+      }, 100);
       return () => clearTimeout(timer);
     }
   }, [visibleBadges, buttonClicked]);
@@ -120,11 +117,11 @@ useEffect(() => {
     if (currentCategory && visibleSkillBadges < currentCategory.badges.length) {
       const timer = setTimeout(() => {
         setVisibleSkillBadges(visibleSkillBadges + 1);
-      }, 200);
+      }, 100);
       return () => clearTimeout(timer);
     }
   }, [visibleSkillBadges, activeBadge, skillCategories]);
-  
+
 
   const handleClick = () => {
     if (buttonClicked) {
@@ -138,7 +135,7 @@ useEffect(() => {
       setVisibleSkillBadges(0);
     }
   };
-  
+
   const handleBadgeClick = (badge) => {
     if (badge === activeBadge) {
       setActiveBadge(null);
@@ -153,9 +150,6 @@ useEffect(() => {
       setVisibleBadges(0);
     }
   };
-  
-  
-  
 
   return (
     <section ref={ref} id='skills'>
@@ -217,9 +211,9 @@ useEffect(() => {
                         opacity: visibleSkillBadges > index ? 1 : 0,
                         position: 'absolute',
                         top: badgeRefs.current[catIndex].offsetTop + y + (windowWidth <= 600 ? 20 : windowWidth <= 820 ? 40 : 25),
-  left: badgeRefs.current[catIndex].offsetLeft + x + (windowWidth <= 600 ? 20 : windowWidth <= 820 ? 40 : 25),
+                        left: badgeRefs.current[catIndex].offsetLeft + x + (windowWidth <= 600 ? 20 : windowWidth <= 820 ? 40 : 25),
                       }}
-                      data-tooltip={badge.text} 
+                      data-tooltip={badge.text}
                     >
                       <img src={badge.img} alt={badge.id} data-bs-toggle="tooltip" data-bs-placement="top" title={badge.text} />
                     </div>
@@ -228,7 +222,6 @@ useEffect(() => {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

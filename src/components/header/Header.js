@@ -1,12 +1,11 @@
-import React, { useRef, useEffect, forwardRef, useCallback } from 'react';
-import { throttle, debounce } from 'lodash';
+import React, {useRef, useEffect, forwardRef, useCallback} from 'react';
+import {throttle, debounce} from 'lodash';
 import './header.scss'
 import Scroll from '../scroll/Scroll';
 
 // Define the Particle class
 class Partical {
-    constructor(effect, x, y, color) {
-        // Store a reference to the Effect object
+    constructor(effect, x, y, color) { // Store a reference to the Effect object
         this.effect = effect;
         // Set the color and size of the particle
         this.color = color;
@@ -23,47 +22,47 @@ class Partical {
         // Set the friction and ease values randomly
         this.friction = Math.random() * 0.9 + 0;
         this.ease = Math.random() * 0.9 + 0;
-    
+
         // Set the initial position of the particle based on a random side of the canvas
         const randomSide = Math.floor(Math.random() * 4); // Generate a random number between 0 and 3
         switch (randomSide) {
-        case 0: // Top edge
-            this.x = Math.random() * effect.canvasWidth;
-            this.y = -this.size;
-            break;
-        case 1: // Right edge
-            this.x = effect.canvasWidth + this.size;
-            this.y = Math.random() * effect.canvasHeight;
-            break;
-        case 2: // Bottom edge
-            this.x = Math.random() * effect.canvasWidth;
-            this.y = effect.canvasHeight + this.size;
-            break;
-        case 3: // Left edge
-            this.x = -this.size;
-            this.y = Math.random() * effect.canvasHeight;
-            break;
-        default:
-            break;
+            case 0: // Top edge
+                this.x = Math.random() * effect.canvasWidth;
+                this.y = -this.size;
+                break;
+            case 1: // Right edge
+                this.x = effect.canvasWidth + this.size;
+                this.y = Math.random() * effect.canvasHeight;
+                break;
+            case 2: // Bottom edge
+                this.x = Math.random() * effect.canvasWidth;
+                this.y = effect.canvasHeight + this.size;
+                break;
+            case 3: // Left edge
+                this.x = -this.size;
+                this.y = Math.random() * effect.canvasHeight;
+                break;
+            default:
+                break;
         }
-    
+
         // Store the original position of the particle
         this.originX = x || this.x;
         this.originY = y || this.y;
     }
     // Draw the particle as a square with the specified color and size
-    draw(){
+    draw() {
         this.effect.context.fillStyle = this.color;
         this.effect.context.fillRect(this.x, this.y, this.size, this.size)
     }
     // Update the particle's position based on its velocity and acceleration
-    update(){
+    update() {
         this.dx = this.effect.mouse.x - this.x;
         this.dy = this.effect.mouse.y - this.y;
         this.distance = this.dx * this.dx + this.dy * this.dy;
         this.force = -this.effect.mouse.radius / this.distance;
 
-        if ( this.distance < this.effect.mouse.radius ){
+        if (this.distance < this.effect.mouse.radius) {
             this.angle = Math.atan2(this.dy, this.dx);
             this.vx += this.force * Math.cos(this.angle);
             this.vy += this.force * Math.sin(this.angle);
@@ -74,8 +73,7 @@ class Partical {
 }
 
 class Effect {
-    constructor(context, canvasWidth, canvasHeight, colorMode) {
-        // constructor initializes properties of the Effect object
+    constructor(context, canvasWidth, canvasHeight, colorMode) { // constructor initializes properties of the Effect object
         this.context = context; // the canvas context to draw on
         this.canvasWidth = canvasWidth; // width of the canvas
         this.canvasHeight = canvasHeight; // height of the canvas
@@ -85,24 +83,24 @@ class Effect {
         this.fontSize = this.canvasWidth < 768 ? 80 : 120; // font size based on canvas width
         this.fontWeight = '900'; // font weight
         this.lineHeight = this.fontSize * 0.9; // line height based on font size
-        this.maxTextWidth = this.canvasWidth * 0.8; // maximum width of the text
+        this.maxTextWidth = this.canvasWidth * 0.8;
+        // maximum width of the text
         // particle text
         this.particles = []; // array to store particles
         this.gap = 1; // gap between particles
         this.mouse = { // mouse position and radius for particle interaction
-        radius: 5000,
-        x: 0,
-        y: 0,
+            radius: 5000,
+            x: 0,
+            y: 0
         };
         // event listener to update mouse position on mouse move
         window.addEventListener('mousemove', (e) => {
-        this.mouse.x = e.x;
-        this.mouse.y = e.y;
+            this.mouse.x = e.x;
+            this.mouse.y = e.y;
         });
-    } 
+    }
     // method to wrap text and convert it to particles
-    wrapText(text){
-        // create gradient for the text fill
+    wrapText(text) { // create gradient for the text fill
         let gradient;
         if (this.colorMode === 'dark') {
             gradient = this.context.createLinearGradient(0, 0, this.canvasWidth, this.canvasHeight);
@@ -117,31 +115,30 @@ class Effect {
         }
 
         this.context.fillStyle = gradient;
-    
+
         // set font style and alignment
         this.context.font = this.fontWeight + ' ' + this.fontSize + 'px Montserrat';
         this.context.textAlign = 'center';
         this.context.textBaseline = 'middle';
-    
+
         // break multiline text into lines
         let linesArray = [];
         let words = text.split(' ');
         let lineCounter = 0;
         let line = '';
-        for ( let i = 0; i < words.length; i++ ){
+        for (let i = 0; i < words.length; i++) {
             let testLine = line + words[i] + ' ';
-            if (this.context.measureText(testLine).width > this.maxTextWidth){
+            if (this.context.measureText(testLine).width > this.maxTextWidth) {
                 line = words[i] + ' ';
                 lineCounter++;
             } else {
                 line = testLine;
-            }
-            linesArray[lineCounter] = line;
-        }      
+            } linesArray[lineCounter] = line;
+        }
         // set text height and position
         let textHeight = this.lineHeight * lineCounter;
         this.textY = this.canvasHeight / 2 - textHeight / 2;
-    
+
         // draw each line of text
         linesArray.forEach((el, index) => {
             this.context.fillText(el, this.textX, this.textY + (index * this.lineHeight));
@@ -150,49 +147,45 @@ class Effect {
         this.convertToParticales();
     }
 
-    convertToParticales(){
-        // Initialize the `particales` array
+    convertToParticales() { // Initialize the `particales` array
         this.particales = [];
-        
+
         // Get the image data from the canvas context
         const pixels = this.context.getImageData(0, 0, this.canvasWidth, this.canvasHeight).data;
-        
+
         // Clear the canvas
         this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-        
+
         // Loop through each pixel in the image data and create a new `Partical` object if the alpha value is greater than 0
-        for ( let y = 0; y < this.canvasHeight; y += this.gap ){
-            for ( let x = 0; x < this.canvasWidth; x += this.gap ){
-                // Calculate the index of the pixel in the image data array
-                const index = ( y * this.canvasWidth + x ) * 4;
-                
+        for (let y = 0; y < this.canvasHeight; y += this.gap) {
+            for (let x = 0; x < this.canvasWidth; x += this.gap) { // Calculate the index of the pixel in the image data array
+                const index = (y * this.canvasWidth + x) * 4;
+
                 // Get the alpha value of the pixel
                 const alpha = pixels[index + 3];
-                
+
                 // If the alpha value is greater than 0, create a new `Partical` object
-                if ( alpha > 0 ){
-                    // Get the red, green, and blue values of the pixel
+                if (alpha > 0) { // Get the red, green, and blue values of the pixel
                     const red = pixels[index];
                     const green = pixels[index + 1];
                     const blue = pixels[index + 2];
-                    
+
                     // Construct the color string from the red, green, and blue values
                     const color = 'rgb(' + red + ',' + green + ',' + blue + ')';
-                    
+
                     // Create a new `Partical` object and add it to the `particales` array
                     this.particales.push(new Partical(this, x, y, color));
                 }
             }
         }
     }
-    
-    render(){
-        // Loop through each `Partical` object in the `particales` array, update its position, and draw it
+
+    render() { // Loop through each `Partical` object in the `particales` array, update its position, and draw it
         this.particales.forEach(particale => {
             particale.update();
             particale.draw();
         })
-    }            
+    }
 }
 
 const DEBOUNCE_DELAY = 100;
@@ -200,59 +193,56 @@ const THROTTLE_DELAY = 50;
 
 const Header = forwardRef((props, ref) => {
     const canvasRef = useRef();
-    const effectRef = useRef();  // New ref to hold the effect instance
-  
+    const effectRef = useRef(); // New ref to hold the effect instance
+
     const handleMouseMove = useCallback(throttle((e) => {
-      effectRef.current.mouse.x = e.x;
-      effectRef.current.mouse.y = e.y;
+        effectRef.current.mouse.x = e.x;
+        effectRef.current.mouse.y = e.y;
     }, THROTTLE_DELAY), []);
-  
+
     const init = useCallback(() => {
-      const canvas = canvasRef.current;
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-  
-      const ctx = canvas.getContext('2d', {
-        willReadFrequently: true,
-      });
-      
-      effectRef.current = new Effect(ctx, canvas.width, canvas.height, props.colorMode);
-      effectRef.current.wrapText('Nick Langley');
-      animate();
+        const canvas = canvasRef.current;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const ctx = canvas.getContext('2d', {willReadFrequently: true});
+
+        effectRef.current = new Effect(ctx, canvas.width, canvas.height, props.colorMode);
+        effectRef.current.wrapText('Nick Langley');
+        animate();
     }, [props.colorMode]);
 
     const animate = () => {
-      const ctx = canvasRef.current.getContext('2d');
-      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-      effectRef.current.render();
-      requestAnimationFrame(animate);
+        const ctx = canvasRef.current.getContext('2d');
+        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        effectRef.current.render();
+        requestAnimationFrame(animate);
     };
-  
+
     const debouncedResize = useCallback(debounce(() => {
-      init();
+        init();
     }, DEBOUNCE_DELAY), [init]);
 
     useEffect(() => {
-      init();
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('resize', debouncedResize);
-      
-      return () => {
-        window.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('resize', debouncedResize);
-      };
-    }, [handleMouseMove, debouncedResize, init]);  // Added init to the dependency array
-    
-      
-  
+        init();
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('resize', debouncedResize);
+
+        return() => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('resize', debouncedResize);
+        };
+    }, [handleMouseMove, debouncedResize, init]); // Added init to the dependency array
+
+
     return (
-      <header ref={ref} id="top">
-        <canvas ref={canvasRef} id="canvas1"></canvas>
-        <Scroll  />
-      </header>
+        <header ref={ref}
+            id="top">
+            <canvas ref={canvasRef}
+                id="canvas1"></canvas>
+            <Scroll/>
+        </header>
     );
 });
-  
-export default Header;
 
-  
+export default Header;

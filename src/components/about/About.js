@@ -1,17 +1,16 @@
 import React from 'react'
 import './about.scss'
-import me from '../../assets/nick.png'
-import { useRef, useEffect, forwardRef } from 'react';
+import {  forwardRef } from 'react';
 
  
 const About = forwardRef((props, ref) => {
   return (
     <section ref={ref} id='about'>
       <h2><span className='faulty-letter'>A</span> Bit Ab<span className='faulty-letter'>o</span><span className='faulty-letter'>u</span>t Me</h2>
-
+      
       <div className="container">
+        <div className='about-img'></div>
         <article>
-          <div className='about-img'></div>
           <h3>Nick Langley - 38</h3>
           <p><em>Frontend Developer - Junior Fullstack Developer</em></p>
           <p>As a highly adaptable and curious individual, I have a strong passion for 
@@ -44,4 +43,4 @@ const About = forwardRef((props, ref) => {
 });
 
 
-export default About 
+export default About  

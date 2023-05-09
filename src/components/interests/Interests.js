@@ -8,7 +8,7 @@ import trainer from '../../assets/trainer.jpg';
 import pirate from '../../assets/pirate.jpg';
 import tarantula from '../../assets/pet-tarantula.jpg';
 import chameleon from '../../assets/chameleon.jpg';
-import snake from '../../assets/Snakes-and-Pets.jpg';
+import snake from '../../assets/Snakes-and-Pets.jpg'; 
 
 const Interests = forwardRef((props, ref) => {
   const [slideIndexes, setSlideIndexes] = useState([0, 0, 0]); // one slide index for each box

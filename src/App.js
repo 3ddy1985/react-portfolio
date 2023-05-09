@@ -6,7 +6,7 @@ import React, {
     useEffect,
     useCallback
 } from 'react';
-import Color_mode from './components/color_mode/Color_mode';
+import ColorMode from './components/color_mode/Color_mode';
 import Nav from './components/nav/Nav';
 import Header from './components/header/Header';
 import Loading from './components/loading/Loading';
@@ -15,6 +15,26 @@ const Skills = lazy(() => import ('./components/skills/Skills'));
 const Projects = lazy(() => import ('./components/project/Projects'));
 const Interests = lazy(() => import ('./components/interests/Interests'));
 const Contact = lazy(() => import ('./components/contact/Contact'));
+
+const debounce = (func, wait = 20, immediate = true) => {
+    let timeout;
+    return() => {
+        const later = () => {
+            timeout = null;
+            if (!immediate) 
+                func.apply(this, arguments);
+            
+
+        };
+        const callNow = immediate && ! timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) 
+            func.apply(this, arguments);
+        
+
+    };
+};
 
 export default function App() {
     const [activeSection, setActiveSection] = useState('about');
@@ -31,26 +51,6 @@ export default function App() {
     const interestsRef = useRef();
     const contactRef = useRef();
 
-    const debounce = (func, wait = 20, immediate = true) => {
-        let timeout;
-        return() => {
-            const later = () => {
-                timeout = null;
-                if (!immediate) 
-                    func.apply(this, arguments);
-                
-
-            };
-            const callNow = immediate && ! timeout;
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-            if (callNow) 
-                func.apply(this, arguments);
-            
-
-        };
-    };
-
     // Simulate the loading time
     useEffect(() => {
         setTimeout(() => {
@@ -64,11 +64,11 @@ export default function App() {
     }, [colorMode]);
 
     const handleScroll = useCallback(() => {
-        const aboutOffset = aboutRef.current ?. offsetTop - window.innerHeight / 2;
-        const skillsOffset = skillsRef.current ?. offsetTop - window.innerHeight / 2;
-        const projectsOffset = projectsRef.current ?. offsetTop - window.innerHeight / 2;
-        const interestsOffset = interestsRef.current ?. offsetTop - window.innerHeight / 2;
-        const contactOffset = contactRef.current ?. offsetTop - window.innerHeight / 2;
+        const aboutOffset = aboutRef.current?.offsetTop - window.innerHeight / 2;
+        const skillsOffset = skillsRef.current?.offsetTop - window.innerHeight / 2;
+        const projectsOffset = projectsRef.current?.offsetTop - window.innerHeight / 2;
+        const interestsOffset = interestsRef.current?.offsetTop - window.innerHeight / 2;
+        const contactOffset = contactRef.current?.offsetTop - window.innerHeight / 2;
 
         if (window.pageYOffset >= aboutOffset && window.pageYOffset < skillsOffset) {
             setActiveSection('about');
@@ -112,7 +112,7 @@ export default function App() {
                 <Loading colorMode={colorMode}/>
             ) : (
                 <>
-                    <Color_mode colorMode={colorMode}
+                    <ColorMode colorMode={colorMode}
                         onColorModeChange={setColorMode}/>
                     <Nav showNav={showNav}
                         activeSection={activeSection}

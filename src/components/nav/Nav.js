@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './nav.scss';
 import { RxPinTop } from 'react-icons/rx';
 import { BsInfoCircleFill } from 'react-icons/bs';
@@ -9,24 +9,21 @@ import { BsChatLeftTextFill } from 'react-icons/bs';
 
 const Nav = ({ activeSection, setActiveSection, showNav }) => {
   
-    const handleToggleClick = (forceClose = false) => {
-      const navLinks = document.querySelector(".nav-links");
-      if (navLinks.classList.contains("open") || forceClose) {
-        navLinks.classList.remove("open");
-      } else {
-        navLinks.classList.add("open");
-      }
-    };
-  
-    const handleNavLinkClick = (section) => {
-      setActiveSection(section);
-      handleToggleClick(true);
-    };
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  return (
-    <nav className={!showNav ? 'hidden' : ''}>
-      <div className="menu-toggle" onClick={() => handleToggleClick()}>&#9776;</div>
-      <div className='nav-links'>
+  const handleToggleClick = () => {
+    setMenuOpen(!menuOpen);
+  };
+  
+  const handleNavLinkClick = (section) => {
+    setActiveSection(section);
+    setMenuOpen(false);
+  };
+
+    return (
+      <nav className={!showNav ? 'hidden' : ''}>
+        <div className="menu-toggle" onClick={handleToggleClick}>&#9776;</div>
+        <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <a href='#top'>
         <div className={`nav-item ${activeSection === 'top' ? 'active' : ''}`} onClick={() => handleNavLinkClick('top')}>
           <RxPinTop/>
