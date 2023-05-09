@@ -188,17 +188,26 @@ class Effect {
     }
 }
 
-const DEBOUNCE_DELAY = 100;
-const THROTTLE_DELAY = 50;
-
 const Header = forwardRef((props, ref) => {
     const canvasRef = useRef();
     const effectRef = useRef(); // New ref to hold the effect instance
+
+    const DEBOUNCE_DELAY = 100;
+    const THROTTLE_DELAY = 50;
 
     const handleMouseMove = useCallback(throttle((e) => {
         effectRef.current.mouse.x = e.x;
         effectRef.current.mouse.y = e.y;
     }, THROTTLE_DELAY), []);
+
+    const animateRef = useRef();
+
+    animateRef.current = () => {
+        const ctx = canvasRef.current.getContext('2d');
+        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        effectRef.current.render();
+        requestAnimationFrame(animateRef.current);
+    };
 
     const init = useCallback(() => {
         const canvas = canvasRef.current;
@@ -209,15 +218,13 @@ const Header = forwardRef((props, ref) => {
 
         effectRef.current = new Effect(ctx, canvas.width, canvas.height, props.colorMode);
         effectRef.current.wrapText('Nick Langley');
-        animate();
+        animateRef.current();
     }, [props.colorMode]);
 
-    const animate = () => {
-        const ctx = canvasRef.current.getContext('2d');
-        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-        effectRef.current.render();
-        requestAnimationFrame(animate);
-    };
+    useEffect(() => {
+        animateRef.current = animate;
+    }, []);
+
 
     const debouncedResize = useCallback(debounce(() => {
         init();
