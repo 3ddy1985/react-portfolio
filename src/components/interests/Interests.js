@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useState, useEffect } from 'react';
+import React, { forwardRef, useRef, useState, useEffect, useCallback } from 'react';
 import './interests.scss';
 import wedding from '../../assets/group.jpg';
 import meAvani from '../../assets/meavani2.jpg';
@@ -21,7 +21,7 @@ const Interests = forwardRef((props, ref) => {
 
   const stopSlideShowRef = useRef(null);
 
-  const startSlideShow = (boxIndex) => {
+  const startSlideShow = useCallback((boxIndex) => {
     let intervalId;
     // set a regular interval to update the slide index for the given box
     const startInterval = () => {
@@ -37,7 +37,7 @@ const Interests = forwardRef((props, ref) => {
       clearInterval(intervalId);
       resetSlideShow(boxIndex);
     };
-  };
+  }, [slideImages]);
 
   const resetSlideShow = (boxIndex) => {
     setSlideIndexes((prevSlideIndexes) =>
