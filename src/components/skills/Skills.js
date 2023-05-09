@@ -86,7 +86,6 @@ const Skills = forwardRef((props, ref) => {
   const [visibleBadges, setVisibleBadges] = useState(0);
   const [buttonClicked, setButtonClicked] = useState(false);
   const [activeBadge, setActiveBadge] = useState(null);
-  const frontendBadgeRef = useRef();
   const [visibleSkillBadges, setVisibleSkillBadges] = useState(0);
   const badgeRefs = useRef([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -120,7 +119,7 @@ const Skills = forwardRef((props, ref) => {
       }, 100);
       return () => clearTimeout(timer);
     }
-  }, [visibleSkillBadges, activeBadge, skillCategories]);
+  }, [visibleSkillBadges, activeBadge]);
 
 
   const handleClick = () => {

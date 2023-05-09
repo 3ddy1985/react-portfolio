@@ -58,7 +58,7 @@ const Interests = forwardRef((props, ref) => {
         stopSlideShow2();
       };
     }
-  }, []);
+  }, [startSlideShow]);
 
   return (
     <section ref={ref} id='interests'>

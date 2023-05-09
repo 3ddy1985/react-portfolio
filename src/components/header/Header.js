@@ -195,10 +195,12 @@ const Header = forwardRef((props, ref) => {
     const DEBOUNCE_DELAY = 100;
     const THROTTLE_DELAY = 50;
 
-    const handleMouseMove = useCallback(throttle((e) => {
-        effectRef.current.mouse.x = e.x;
-        effectRef.current.mouse.y = e.y;
-    }, THROTTLE_DELAY), []);
+    const handleMouseMove = useCallback((e) => {
+        throttle(() => {
+            effectRef.current.mouse.x = e.x;
+            effectRef.current.mouse.y = e.y;
+        }, THROTTLE_DELAY)();
+    }, []);
 
     const animateRef = useRef();
 
@@ -224,9 +226,11 @@ const Header = forwardRef((props, ref) => {
  
 
 
-    const debouncedResize = useCallback(debounce(() => {
-        init();
-    }, DEBOUNCE_DELAY), [init]);
+    const debouncedResize = useCallback(() => {
+        debounce(() => {
+            init();
+        }, DEBOUNCE_DELAY)();
+    }, [init]);
 
     useEffect(() => {
         init();

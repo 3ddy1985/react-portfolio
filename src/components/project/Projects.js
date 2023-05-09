@@ -119,7 +119,7 @@ const Projects = forwardRef((props, ref) => {
                                 <p>{
                                     project.description
                                 }</p>
-                                <a href="#"
+                                <a href="#project-details"
                                     onClick={
                                         (event) => handleLearnMoreClick(event, project)
                                 }>Learn more</a>
@@ -169,17 +169,17 @@ const Projects = forwardRef((props, ref) => {
                             {
                             selectedProject.liveLink && <a href={
                                 selectedProject.liveLink
-                            } target='_blank' rel="noopener noreferrer">Live Link</a>
+                            } target='_blank' rel="noopener noreferrer">Live Site</a>
                         }
                             {
                             selectedProject.readMe1 && <a href={
                                 selectedProject.readMe1
-                            } target='_blank' rel="noopener noreferrer">ReadMe1</a>
+                            } target='_blank' rel="noopener noreferrer">Read Me</a>
                         }
                             {
                             selectedProject.readMe2 && <a href={
                                 selectedProject.readMe2
-                            } target='_blank' rel="noopener noreferrer">ReadMe2</a>
+                            } target='_blank' rel="noopener noreferrer">Read Me Backend</a>
                         } </div>
                     </div>
                 </div>
