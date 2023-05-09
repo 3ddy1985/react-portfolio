@@ -16,23 +16,19 @@ const Projects = lazy(() => import ('./components/project/Projects'));
 const Interests = lazy(() => import ('./components/interests/Interests'));
 const Contact = lazy(() => import ('./components/contact/Contact'));
 
-const debounce = (func, wait = 20, immediate = true) => {
+const debounce = function(func, wait = 20, immediate = true) {
     let timeout;
-    return() => {
+    return function() {
         const later = () => {
             timeout = null;
             if (!immediate) 
                 func.apply(this, arguments);
-            
-
         };
-        const callNow = immediate && ! timeout;
+        const callNow = immediate && !timeout;
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
         if (callNow) 
             func.apply(this, arguments);
-        
-
     };
 };
 
