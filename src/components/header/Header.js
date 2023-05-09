@@ -202,28 +202,26 @@ const Header = forwardRef((props, ref) => {
 
     const animateRef = useRef();
 
-    animateRef.current = () => {
-        const ctx = canvasRef.current.getContext('2d');
-        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-        effectRef.current.render();
-        requestAnimationFrame(animateRef.current);
-    };
-
     const init = useCallback(() => {
         const canvas = canvasRef.current;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
+    
         const ctx = canvas.getContext('2d', {willReadFrequently: true});
-
+    
         effectRef.current = new Effect(ctx, canvas.width, canvas.height, props.colorMode);
         effectRef.current.wrapText('Nick Langley');
+    
+        animateRef.current = () => {
+            const ctx = canvasRef.current.getContext('2d');
+            ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+            effectRef.current.render();
+            requestAnimationFrame(animateRef.current);
+        };
+    
         animateRef.current();
     }, [props.colorMode]);
-
-    useEffect(() => {
-        animateRef.current = animate;
-    }, []);
+ 
 
 
     const debouncedResize = useCallback(debounce(() => {
