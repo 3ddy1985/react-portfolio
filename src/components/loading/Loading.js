@@ -4,12 +4,18 @@ import './loading.scss';
 const Loading = ({ colorMode }) => {
   const [load, setLoad] = useState(0);
   const [loadingCircleStyle, setLoadingCircleStyle] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const updateLoader = () => {
       setLoad((prevLoad) => {
-        const newLoad = prevLoad < 100 ? prevLoad + 1 : prevLoad;
+        let newLoad = prevLoad;
   
+        if (prevLoad < 100) {
+          newLoad = prevLoad + 1;
+        } else if (!isLoaded) {
+          setIsLoaded(true);
+        }
         const colors = colorMode === 'dark' ? {
           primary: 'rgb(255,85,170)',
           secondary: 'rgb(255,7,131)',
@@ -29,22 +35,27 @@ const Loading = ({ colorMode }) => {
     };
   
     const interval = setInterval(updateLoader, 70);
-  
-    return () => {
-      clearInterval(interval);
-    };
-  }, [colorMode]);
-  
 
-  return (
-    <div className="loading-box">
-      <div className="loading-circle" style={loadingCircleStyle}>
-        <p className="loading-count glowing-txt">
-          <span>{load}</span><span className='faulty-letter'>%</span>
-        </p>
-      </div>
+  return () => {
+    clearInterval(interval);
+  };
+}, [colorMode, isLoaded]);
+
+// Conditionally apply the spinning animation to the text
+let loadingCountClass = 'loading-count';
+if (!isLoaded) {
+  loadingCountClass += ' spin';
+}
+
+return (
+  <div className="loading-box">
+    <div className="loading-circle" style={loadingCircleStyle}>
+      <p className={loadingCountClass} >
+        <span>{load}</span><span className='faulty-letter'>%</span>
+      </p>
     </div>
-  );
+  </div>
+);
 };
 
 export default Loading;

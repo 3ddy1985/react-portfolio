@@ -110,7 +110,7 @@ useEffect(() => {
     if (buttonClicked && visibleBadges < 4) {
       const timer = setTimeout(() => {
         setVisibleBadges(visibleBadges + 1);
-      }, 500);
+      }, 200);
       return () => clearTimeout(timer);
     }
   }, [visibleBadges, buttonClicked]);
@@ -120,7 +120,7 @@ useEffect(() => {
     if (currentCategory && visibleSkillBadges < currentCategory.badges.length) {
       const timer = setTimeout(() => {
         setVisibleSkillBadges(visibleSkillBadges + 1);
-      }, 500);
+      }, 200);
       return () => clearTimeout(timer);
     }
   }, [visibleSkillBadges, activeBadge, skillCategories]);

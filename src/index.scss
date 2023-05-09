@@ -40,6 +40,17 @@
     // nav shadows
     --a-background: linear-gradient(145deg, #101010, #131313);
     --a-box-shadow: 6px 6px 12px #070707, -6px -6px 12px #1d1d1d;
+
+    // #projects section
+  --bg: #1e1e1e; // Darker background color
+  --face2-box-shadow: 0 20px 50px rgba(0, 0, 0, .8);
+  --hover-box-shadow: inset 0 0 60px #333,
+                      inset 20px 0 80px #ff2a80,
+                      inset -20px 0 80px #00b0ff,
+                      inset 20px 0 300px #ff2a80,
+                      inset -20px 0 300px #00b0ff, 
+                      -10px 0 40px #ff2a80,
+                      10px 0 40px #00b0ff;
   }
   
   // Light mode variables
@@ -64,6 +75,19 @@
     // nav shadows
     --a-background: linear-gradient(145deg, #efefef, #ececec);
     --a-box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3);
+
+    // #projects section
+    --bg: whitesmoke;
+    --face2-box-shadow: 0 20px 50px rgba(0, 0, 0, .8);
+    --hover-box-shadow:  inset 0 0 60px whitesmoke, 
+                         inset 20px 0 80px #f0f,
+                         inset -20px 0 80px #0ff,
+                         inset 20px 0 300px #f0f,
+                         inset -20px 0 300px #0ff, 
+                         0 0 50px #f0f,
+                         -10px 0 80px #f0f, 
+                         10px 0 80px #0ff;
+    
   }
   
 
